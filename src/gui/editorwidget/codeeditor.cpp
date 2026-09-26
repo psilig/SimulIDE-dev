@@ -1085,7 +1085,7 @@ void LineNumberArea::contextMenuEvent( QContextMenuEvent *event)
     connect( clrBrkAction, &QAction::triggered,
                m_codeEditor, &CodeEditor::slotClearBreak, Qt::UniqueConnection );
 
-    if( menu.exec(event->globalPos()) != 0 ) lastPos = event->pos().y();
+    if( menu.exec(event->globalPos()) != nullptr ) lastPos = event->pos().y();
 }
 
 void LineNumberArea::mousePressEvent( QMouseEvent* event )

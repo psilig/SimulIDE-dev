@@ -246,8 +246,7 @@ void CircuitView::contextMenuEvent( QContextMenuEvent* event )
     if( m_circuit->is_constarted() ) m_circuit->deleteNewConnector();
     else if( !event->isAccepted() )
     {
-        QPointF eventPos = mapToScene( event->globalPos() ) ;
-        m_eventpoint = mapToScene( event->pos()  );
+        m_eventpoint = mapToScene( event->pos() );
 
         QMenu menu;
 
@@ -279,7 +278,7 @@ void CircuitView::contextMenuEvent( QContextMenuEvent* event )
         connect(createBomAct, &QAction::triggered,
                    m_circuit, &Circuit::bom, Qt::UniqueConnection );*/
 
-        menu.exec( mapFromScene( eventPos ) );
+        menu.exec( event->globalPos() );
 }   }
 
 QRectF CircuitView::selectedRect()
