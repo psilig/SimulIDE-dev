@@ -20,7 +20,7 @@ struct propStr_t{
     QString value;
 };
 
-QVector<propStr_t> parseXmlProps( QString line );
-QVector<propStr_t> parseProps( QString line );
+QList<propStr_t> parseXmlProps( QString line );
+QList<propStr_t> parseProps( QString line );
 propStr_t parseProp( QString token );
 

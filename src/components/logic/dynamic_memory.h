@@ -62,8 +62,8 @@ class DynamicMemory : public LogicComponent, public MemData
         int m_address;
         bool m_refreshError;
 
-        QVector<int> m_ram;
-        QVector<uint64_t> m_rowLastRefresh;
+        QList<int> m_ram;
+        QList<uint64_t> m_rowLastRefresh;
 
         bool m_oe;
         bool m_ras;

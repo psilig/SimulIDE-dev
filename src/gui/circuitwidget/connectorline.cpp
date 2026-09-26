@@ -373,7 +373,7 @@ QPainterPath ConnectorLine::shape() const
     }
 
     QPainterPath path;
-    QVector<QPointF> points;
+    QList<QPointF> points;
     
     if( fabs(m_p2X - m_p1X) > fabs(m_p2Y - m_p1Y) )
     {

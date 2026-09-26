@@ -165,13 +165,11 @@ QDomDocument fileToDomDoc( QString fileName, QString caller )
         qDebug() << caller << "Error: Cannot read file:\n"+fileName+"\n"+file.errorString();
         return domDoc;
     }
-    QString error;
-    int errorLine=0;
-    int errorColumn=0;
-    if( !domDoc.setContent( &file, false, &error, &errorLine, &errorColumn ) )
+    const QDomDocument::ParseResult result = domDoc.setContent( &file );
+    if( !result )
     {
-         qDebug() << caller << "Error: Cannot set file to DomDocument:\n"<<fileName<<"\nLine"<<errorLine<<errorColumn+"\n";
-         qDebug() << error;
+         qDebug() << caller << "Error: Cannot set file to DomDocument:" << fileName << "Line:" << result.errorLine << result.errorColumn;
+         qDebug() << result.errorMessage;
          domDoc.clear();
     }
     file.close();

@@ -26,7 +26,7 @@ CompBase::~CompBase()
     }
 }
 
-void CompBase::loadProperties( QVector<propStr_t> properties ) // Set properties in correct order
+void CompBase::loadProperties( QList<propStr_t> properties ) // Set properties in correct order
 {
     for( propStr_t prop : properties ) // Set properties
         setPropStr( prop.name, prop.value );

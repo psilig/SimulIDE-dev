@@ -214,8 +214,8 @@ void PlotDisplay::paintEvent( QPaintEvent* /* event */ )
         QPen pen2( m_color[i], 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin );
         p.setPen( pen2 );
 
-        QVector<double>*   voltData = &m_channel[i]->m_buffer;
-        QVector<uint64_t>* timeData = &m_channel[i]->m_time;
+        QList<double>*   voltData = &m_channel[i]->m_buffer;
+        QList<uint64_t>* timeData = &m_channel[i]->m_time;
 
         m_vMaxVal[i] = -1e12;
         m_vMinVal[i] =  1e12;

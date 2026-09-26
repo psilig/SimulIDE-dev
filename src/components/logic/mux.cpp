@@ -157,7 +157,7 @@ QPainterPath Mux::shape() const
     int w = m_width*8/2;
     int h = m_height*8/2;
 
-    QVector<QPointF> points;
+    QList<QPointF> points;
     
     points << QPointF(-w,-h-6 )
            << QPointF(-w, h+6 )

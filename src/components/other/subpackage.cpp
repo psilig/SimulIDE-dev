@@ -545,7 +545,7 @@ void SubPackage::setPackagePins( QString pinsStr )
     for( QString pin : pins )
     {
         if( pin.isEmpty() ) continue;
-        QVector<propStr_t> properties = parseProps( pin );
+        QList<propStr_t> properties = parseProps( pin );
         QString item = properties.takeFirst().name;
         if( item == "Pin" ) setPinStr( properties );
     }
@@ -620,7 +620,7 @@ void SubPackage::savePackage( QString fileName )
 
     if( !file.open(QFile::WriteOnly | QFile::Text) )
     {
-          QMessageBox::warning(0l, "Circuit::saveCircuit",
+          QMessageBox::warning(MainWindow::self(), "Circuit::saveCircuit",
           tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
           return;
     }
@@ -825,10 +825,10 @@ EditDialog::EditDialog( SubPackage* pack, Pin* eventPin, QWidget* parent )
     QObject::connect( m_idLineEdit, &QLineEdit::textEdited,
                       [=](const QString &s){ m_package->setPinId(s); } );
 
-    QObject::connect( m_spaceBox, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+    QObject::connect( m_spaceBox, &QDoubleSpinBox::valueChanged,
                       [=](double s){ m_package->setPinSpace(s); } );
 
-    QObject::connect( m_angleBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
+    QObject::connect( m_angleBox, &QComboBox::currentIndexChanged,
                       [=](int a){ m_package->setPinAngle(a); }  );
 
     QObject::connect( m_invertCheckBox, &QCheckBox::toggled,

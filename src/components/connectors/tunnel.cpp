@@ -5,6 +5,7 @@
 
 #include <QInputDialog>
 
+#include "circuitview.h"
 #include "tunnel.h"
 #include "linker.h"
 #include "itemlibrary.h"
@@ -220,14 +221,14 @@ void Tunnel::contextMenu( QGraphicsSceneContextMenuEvent* event, QMenu* menu )
 void Tunnel::renameGroup()
 {
     bool ok;
-    QString text = QInputDialog::getText( NULL, tr("Rename Tunnels"),
+    QString text = QInputDialog::getText( CircuitView::self(), tr("Rename Tunnels"),
                                          tr("New name:"), QLineEdit::Normal,
                                          m_name, &ok );
     if( ok && !text.isEmpty() )
     {
         QList<Tunnel*>* list = m_tunnels.value( m_name );
         if( !list ) return;
-        QVector<Tunnel*> tunnels = list->toVector();
+        const QList<Tunnel*> tunnels = *list;
         for( Tunnel* tunnel: tunnels ) tunnel->setGroupName( text, false );
 
         Circuit::self()->update();

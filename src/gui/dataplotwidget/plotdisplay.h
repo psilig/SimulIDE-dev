@@ -56,8 +56,8 @@ class PlotDisplay : public QWidget
         PlotBase*    m_component;
         DataChannel* m_channel[8];
 
-        QVector<double>* m_buffer[8];
-        QVector<uint64_t>* m_time[8];
+        QList<double>* m_buffer[8];
+        QList<uint64_t>* m_time[8];
         int m_bufferCounter[8];
 
         double m_timeStart;

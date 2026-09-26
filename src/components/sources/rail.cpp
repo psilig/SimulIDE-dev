@@ -73,7 +73,7 @@ QPainterPath Rail::shape() const
 {
     QPainterPath path;
 
-    QVector<QPointF> points;
+    QList<QPointF> points;
 
     points << QPointF(-4,-8 )
            << QPointF(-4, 8 )

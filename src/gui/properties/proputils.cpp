@@ -5,7 +5,7 @@
 
 #include <QStringList>
 #include <QPointF>
-#include <QVector>
+#include <QList>
 #include "proputils.h"
 
 QPointF getPointF( QString p )
@@ -21,9 +21,9 @@ QString getStrPointF( QPointF p )
 
 //---------------------------------------------------
 
-QVector<propStr_t> parseXmlProps( QString line )
+QList<propStr_t> parseXmlProps( QString line )
 {
-    QVector<propStr_t> properties;
+    QList<propStr_t> properties;
 
     QString name;
     QStringList tokens = line.split("\"");
@@ -42,9 +42,9 @@ QVector<propStr_t> parseXmlProps( QString line )
     return properties;
 }
 
-QVector<propStr_t> parseProps( QString line )
+QList<propStr_t> parseProps( QString line )
 {
-    QVector<propStr_t> properties;
+    QList<propStr_t> properties;
 
     QList<QString> tokens = line.split(';');
 

@@ -426,7 +426,7 @@ QString Mcu::getPGM()
     if( m_savePGM )
     {
         QString pgmStr;
-        QVector<int> pgm;
+        QList<int> pgm;
         for( uint16_t val : m_eMcu.m_progMem ) pgmStr += QString::number( val )+",";
 
         return pgmStr;
@@ -450,7 +450,7 @@ void Mcu::setPGM( QString pgm )
 void Mcu::setEeprom( QString eep )
 {
     if( eep.isEmpty() ) return;
-    QVector<int> eeprom;
+    QList<int> eeprom;
     QStringList list = eep.split(",");
     for( QString val : list ) eeprom.append( val.toUInt() );
 
@@ -478,7 +478,7 @@ QString Mcu::getEeprom()  // Used by property, stripped to last written value.
 
 void Mcu::loadEEPROM()
 {
-   QVector<int>* eeprom = m_eMcu.eeprom();
+   QList<int>* eeprom = m_eMcu.eeprom();
    MemData::loadData( eeprom, false );
    m_eMcu.setEeprom( eeprom );
    if( m_mcuMonitor ) m_mcuMonitor->tabChanged( 1 );
@@ -502,7 +502,7 @@ void Mcu::slotLoad()
 void Mcu::slotReload()
 {
     if( !m_eMcu.m_firmware.isEmpty() ) load( m_eMcu.m_firmware );
-    else QMessageBox::warning( 0, "Mcu::slotReload", tr("No File to reload ") );
+    else QMessageBox::warning( CircuitWidget::self(), "Mcu::slotReload", tr("No File to reload ") );
 }
 
 bool Mcu::load( QString fileName )
@@ -521,7 +521,7 @@ bool Mcu::load( QString fileName )
     if( Simulator::self()->simState() > SIM_STARTING )  CircuitWidget::self()->powerCircOff();
 
     int size = m_eMcu.flashSize();
-    QVector<int> pgm( size );
+    QList<int> pgm( size );
     for( int i=0; i<size; ++i ) pgm[i] = m_eMcu.getFlashValue( i );
 
     if( !MemData::loadFile( &pgm, cleanPathAbs, false, m_eMcu.m_wordSize*8, &m_eMcu ) )

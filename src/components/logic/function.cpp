@@ -14,6 +14,7 @@
 #include "circuit.h"
 #include "simulator.h"
 #include "circuitwidget.h"
+#include "circuitview.h"
 #include "itemlibrary.h"
 #include "utils.h"
 #include "iopin.h"
@@ -389,7 +390,7 @@ void Function::onbuttonclicked( int  i )
 //       ++i;
 //    }
     bool ok;
-    QString text = QInputDialog::getText(0l, tr("Set Function"),
+    QString text = QInputDialog::getText(CircuitView::self(), tr("Set Function"),
                                              "Output "+QString::number(i)+tr(" Function:"),
                                              QLineEdit::Normal,
                                              m_funcList[i], &ok);

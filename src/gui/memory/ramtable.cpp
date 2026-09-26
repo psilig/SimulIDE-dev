@@ -102,17 +102,17 @@ RamTable::RamTable( QWidget* parent, eMcu* processor ,bool cpuMonitor )
     variables->setModel( m_variableModel );
     variables->setEditTriggers( QAbstractItemView::NoEditTriggers );
 
-    splitter->setSizes( {{50,320}} );
+    splitter->setSizes( {50, 320} );
     splitter_2->setSizes( {100,30} );
 
-    /*connect( registers, SIGNAL(doubleClicked(QModelIndex)),
-             this,      SLOT(RegDoubleClick(QModelIndex)));*/
+    /*connect( registers, &QAbstractItemView::doubleClicked,
+             this,      &RamTable::RegDoubleClick);*/
 
-    connect( variables, SIGNAL(activated(QModelIndex)),
-             this,      SLOT(VarDoubleClick(QModelIndex)));
+    connect( variables, &QAbstractItemView::activated,
+             this,      &RamTable::VarDoubleClick );
 
-    connect( registers, SIGNAL(activated(QModelIndex)),
-             this,      SLOT(RegDoubleClick(QModelIndex)));
+    connect( registers, &QAbstractItemView::activated,
+             this,      &RamTable::RegDoubleClick );
 
     connect( this, &RamTable::customContextMenuRequested,
              this, &RamTable::slotContextMenu, Qt::UniqueConnection);
@@ -231,7 +231,7 @@ void RamTable::saveVarSet()
 
         if( !file.open(QFile::WriteOnly | QFile::Text) )
         {
-              QMessageBox::warning(0l, "RamTable::saveVarSet",
+              QMessageBox::warning(this, "RamTable::saveVarSet",
               tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
               return;
         }

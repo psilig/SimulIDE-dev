@@ -84,7 +84,7 @@ QPainterPath Comparator::shape() const
 {
     QPainterPath path;
     
-    QVector<QPointF> points;
+    QList<QPointF> points;
     
     points << QPointF(-16,-16 )
            << QPointF(-16, 16 )

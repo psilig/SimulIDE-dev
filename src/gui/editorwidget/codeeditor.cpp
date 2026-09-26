@@ -26,7 +26,7 @@
 #include "stringprop.h"
 #include "boolprop.h"
 
-static QVector<QPair<QString, QString>> pairs = {
+static const std::vector<std::pair<QString, QString>> pairs = {
     {"(", ")"},
     {"{", "}"},
     {"[", "]"},
@@ -78,7 +78,7 @@ CodeEditor::CodeEditor( QWidget* parent, OutPanelText* outPane )
     m_completer->setCompletionMode( QCompleter::PopupCompletion );
     m_completer->setCaseSensitivity( Qt::CaseInsensitive );
 
-    connect( m_completer, QOverload<const QString&>::of( &QCompleter::activated ),
+    connect( m_completer, qOverload<const QString&>( &QCompleter::activated ),
              this       , &CodeEditor::insertCompletion );
 
     connect( this, &CodeEditor::blockCountChanged,
@@ -698,12 +698,12 @@ void CodeEditor::keyPressEvent( QKeyEvent* event )
             }
         }else{
             QString text = event->text();
-            for( int i=0; i<pairs.size(); ++i )  // Auto close pairs
+            for( size_t i=0; i<pairs.size(); ++i )  // Auto close pairs
             {
-                QPair<QString, QString> pair = pairs.at(i);
-                if( pair.first != text ) continue;
-                if( !(m_autoClose & 1<<i) ) continue;
-                insertPlainText( pair.second );
+                const auto& [open, close] = pairs.at(i);
+                if( open != text ) continue;
+                if( !(m_autoClose & (1 << i)) ) continue;
+                insertPlainText( close );
                 moveCursor( QTextCursor::MoveOperation::Left );
                 break;
             }
@@ -799,7 +799,7 @@ void CodeEditor::loadConfig()
     for( QString line : docLines )
     {
         if( !line.startsWith("<item") ) continue;
-        QVector<propStr_t> properties = parseXmlProps( line );
+        QList<propStr_t> properties = parseXmlProps( line );
 
         propStr_t itemType = properties.takeFirst();
         if( itemType.name != "itemtype") continue;

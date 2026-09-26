@@ -151,7 +151,7 @@ QPainterPath Servo::shape() const
 {
     QPainterPath path;
     
-    QVector<QPointF> points;
+    QList<QPointF> points;
     points << QPointF(-40,-24 )
            << QPointF(-40, 24 )
            << QPointF(  6, 24 )

@@ -138,7 +138,7 @@ void LogicFamily::getFamilies() // Static
     QStringList docLines = doc.split(QChar('\n'));
     for( QString line : docLines )
     {
-        QVector<propStr_t> properties = parseProps( line );
+        QList<propStr_t> properties = parseProps( line );
         if( properties.isEmpty() ) break;
         QString familyName = properties.takeFirst().name;
         logicFamily_t family;
@@ -160,28 +160,4 @@ void LogicFamily::getFamilies() // Static
         }
         m_families[familyName] = family;
     }
-    /*QVector<QStringRef> docLines = doc.splitRef("\n");
-    for( QStringRef line : docLines )
-    {
-        QVector<propStr_t> properties = parseProps( line );
-        if( properties.isEmpty() ) break;
-        QString familyName = properties.takeFirst().name.toString();
-        logicFamily_t family;
-
-        for( propStr_t property : properties )
-        {
-            QStringRef propName = property.name;
-            double  propValue = property.value.toDouble();
-            if     ( propName == "supply") family.supply = propValue;
-            else if( propName == "inpLHp") family.inpLHp = propValue;
-            else if( propName == "inpHLp") family.inpHLp = propValue;
-            else if( propName == "inpImp") family.inpImp = propValue;
-            else if( propName == "inpPul") family.inpPul = propValue;
-            else if( propName == "outHip") family.outHip = propValue;
-            else if( propName == "outLop") family.outLop = propValue;
-            else if( propName == "outImp") family.outImp = propValue;
-            else if( propName == "outPul") family.outPul = propValue;
-        }
-        m_families[familyName] = family;
-    }*/
 }

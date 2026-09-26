@@ -19,8 +19,8 @@ class MemTable : public QWidget, private Ui::MemTable
     public:
         MemTable( QWidget* parent=0, int dataSize=256, int wordBytes=1 );
 
-        void updateTable( QVector<int>* data );
-        void setData( QVector<int>* data, int wordBytes=1 );
+        void updateTable( QList<int>* data );
+        void setData( QList<int>* data, int wordBytes=1 );
         void setValue( int address, int val );
         void setCellBytes( int bytes );
         void setAddrSelected( int addr ,bool jump );
@@ -41,7 +41,7 @@ class MemTable : public QWidget, private Ui::MemTable
         void setCellValue( int address, int val );
         void cellClicked( int row, int col );
         QString valToHex( int val, int bytes );
-        QVector<int> toIntVector();
+        QList<int> toIntVector();
 
         int m_updtCount;
         int m_dataSize;
@@ -55,5 +55,5 @@ class MemTable : public QWidget, private Ui::MemTable
         bool m_canSaveLoad;
 
         QTableWidgetItem* m_hoverItem;
-        QVector<int>* m_data;
+        QList<int>* m_data;
 };

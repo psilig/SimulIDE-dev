@@ -51,5 +51,5 @@ class OutHighlighter : public QSyntaxHighlighter
             QRegularExpression pattern;
             QTextCharFormat format;
         };
-        QVector<HighlightingRule> highlightingRules;
+        QList<HighlightingRule> highlightingRules;
 };

@@ -66,8 +66,8 @@ FileWidget::FileWidget( QWidget* parent )
     connect( m_bookmarks, &QListWidget::itemClicked,
              this,        &FileWidget::itemClicked, Qt::UniqueConnection);
              
-    //connect( m_searchFiles, SIGNAL( editingFinished() ),
-    //         this,          SLOT( searchChanged() ), Qt::UniqueConnection);
+    //connect( m_searchFiles, &QLineEdit::editingFinished,
+    //         this,          &FileWidget::searchChanged, Qt::UniqueConnection);
 
     connect( m_cdUpButton,  &QToolButton::released,
              m_fileBrowser, &FileBrowser::cdUp, Qt::UniqueConnection);
@@ -181,8 +181,8 @@ void FileWidget::contextMenuEvent( QContextMenuEvent* event )
         QMenu menu;
 
         QAction* remBookMarkAction = menu.addAction(ThemeManager::self()->icon(":/remove.svg"),tr("Remove Bookmark"));
-        connect( remBookMarkAction, SIGNAL( triggered()), 
-                 this,              SLOT(   remBookMark() ) );
+        connect( remBookMarkAction, &QAction::triggered, 
+                 this,              &FileWidget::remBookMark );
                  
         menu.exec( eventPos );
 }   }

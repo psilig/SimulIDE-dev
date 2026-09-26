@@ -372,7 +372,7 @@ void QemuDevice::slotLoad()
 void QemuDevice::slotReload()
 {
     if( !m_firmware.isEmpty() ) setFirmware( m_firmware );
-    else QMessageBox::warning( 0, "QemuDevice::slotReload", tr("No File to reload ") );
+    else QMessageBox::warning( CircuitWidget::self(), "QemuDevice::slotReload", tr("No File to reload ") );
 }
 
 void QemuDevice::setFirmware( QString file )

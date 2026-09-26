@@ -227,7 +227,7 @@ void eMcu::forceFreq( double freq )
     m_freq = freq;
 }
 
-void eMcu::setEeprom( QVector<int>* eep )
+void eMcu::setEeprom( QList<int>* eep )
 {
     int size = m_romSize;
     if( eep->size() < size ) size = eep->size();

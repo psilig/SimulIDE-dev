@@ -8,7 +8,7 @@
 #include "e-element.h"
 #include "updatable.h"
 
-#include <QVector>
+#include <QList>
 
 enum cond_t{
     C_NONE=0,
@@ -48,11 +48,11 @@ class DataChannel : public eElement, public Updatable
         void setTestData( QString td );
 
     protected:
-        QVector<double> m_buffer;
-        QVector<uint64_t> m_time;
+        QList<double> m_buffer;
+        QList<uint64_t> m_time;
 
-        QVector<double> m_bufferTest;
-        QVector<uint64_t> m_timeTest;
+        QList<double> m_bufferTest;
+        QList<uint64_t> m_timeTest;
 
         bool m_connected;
         bool m_rising;

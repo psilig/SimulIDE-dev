@@ -336,7 +336,7 @@ p->setBrush( QColor( *m_backColor ) );
     }
     else{
         QPainterPath path;
-        QVector<QPointF> points;
+        QList<QPointF> points;
         points << QPointF(-8, 0 )
                << QPointF( 0,-13 )
                << QPointF( 8, 0 )

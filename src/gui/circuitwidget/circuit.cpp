@@ -211,7 +211,7 @@ void Circuit::loadStrDoc( QString &doc )
     QStringList docLines = doc.split("\n");
     for( QString line : docLines )
     {
-        QVector<propStr_t> properties = parseXmlProps( line );
+        QList<propStr_t> properties = parseXmlProps( line );
 
         if( line.startsWith("<item") )
         {
@@ -479,7 +479,7 @@ bool Circuit::saveString( QString fileName, QString doc )
     if( !file.open( QFile::WriteOnly | QFile::Text ))
     {
         QApplication::restoreOverrideCursor();
-        QMessageBox::warning( nullptr, "Circuit::saveString",
+        QMessageBox::warning( m_graphicView, "Circuit::saveString",
         tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
         return false;
     }
@@ -955,7 +955,7 @@ void Circuit::deleteNewConnector()
     QFile file( fileName );
     if( !file.open(QFile::WriteOnly | QFile::Text) )
     {
-          QMessageBox::warning(0l, "Circuit::bom",
+          QMessageBox::warning( m_graphicView, "Circuit::bom",
           tr("Cannot write file %1:\n%2.").arg(fileName).arg(file.errorString()));
     }
     bom.sort();

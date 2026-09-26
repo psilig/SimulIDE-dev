@@ -39,7 +39,7 @@ MemTable::MemTable( QWidget* parent, int dataSize, int wordBytes )
     connect( actionLoad_Memory_Table, &QAction::triggered, this, &MemTable::loadTable );
 }
 
-void MemTable::updateTable( QVector<int>* data )
+void MemTable::updateTable( QList<int>* data )
 {
     if( ++m_updtCount >= 10 ) m_updtCount = 0;
     else                      return;
@@ -89,7 +89,7 @@ void MemTable::setCellValue( int address, int val )
     table->item( row, colAscii )->setData( 0, valS );
 }
 
-void MemTable::setData( QVector<int>* data, int wordBytes )
+void MemTable::setData( QList<int>* data, int wordBytes )
 {
     m_data = data;
 
@@ -271,7 +271,7 @@ void MemTable::saveTable()
     if (m_data)
         MemData::saveData( m_data );
     else {
-        QVector<int> data { toIntVector() };
+        QList<int> data { toIntVector() };
         MemData::saveData( &data );
     }
 
@@ -279,8 +279,8 @@ void MemTable::saveTable()
 
 void MemTable::loadTable()
 {
-    QVector<int> oldData { toIntVector() };
-    QVector<int> data(m_dataSize);
+    QList<int> oldData { toIntVector() };
+    QList<int> data(m_dataSize);
     if ( MemData::loadData( &data,false ) ) {
         for( int i=0; i<m_dataSize; ++i ) {
             if ( oldData[i] != data[i] ) {
@@ -312,9 +312,9 @@ QString MemTable::valToHex( int val, int bytes )
     return sval;
 }
 
-QVector<int> MemTable::toIntVector()
+QList<int> MemTable::toIntVector()
 {
-    QVector<int> data( m_dataSize );
+    QList<int> data( m_dataSize );
     int rows = m_dataSize/16;
     if ( m_dataSize%16 ) rows++;
     int i = 0;

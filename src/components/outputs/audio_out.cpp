@@ -233,7 +233,7 @@ QPainterPath AudioOut::shape() const
 {
     QPainterPath path;
     
-    QVector<QPointF> points;
+    QList<QPointF> points;
     points << QPointF(-10,-12 )
            << QPointF(-10, 4 )
            << QPointF( 0, 4 )

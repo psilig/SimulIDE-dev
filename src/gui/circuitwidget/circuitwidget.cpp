@@ -144,7 +144,7 @@ void CircuitWidget::createActions()
     saveCircAct = new QAction( QIcon(":/save.svg"), tr("&Save Circuit\tCtrl+S"), this);
     saveCircAct->setStatusTip( tr("Save the Circuit to disk"));
     connect( saveCircAct, &QAction::triggered,
-                    this, QOverload<>::of(&CircuitWidget::saveCirc), Qt::UniqueConnection );
+                    this, qOverload<>(&CircuitWidget::saveCirc), Qt::UniqueConnection );
 
     saveCircAsAct = new QAction( QIcon(":/saveas.svg"),tr("Save Circuit &As...\tCtrl+Shift+S"), this);
     saveCircAsAct->setStatusTip( tr("Save the Circuit under a new name"));

@@ -295,7 +295,7 @@ void ComponentList::loadXml( QString xmlFile )
                             for( QString line : lines )
                             {
                                 if( !line.startsWith("<item itemtype=\"Image\"") ) continue;
-                                QVector<propStr_t> properties = parseXmlProps( line );
+                                QList<propStr_t> properties = parseXmlProps( line );
                                 for( propStr_t prop : properties )
                                 {
                                     if( prop.name != "BckGndData") continue;

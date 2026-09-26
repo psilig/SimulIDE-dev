@@ -279,8 +279,8 @@ void MainWindow::createWidgets()
     m_searchComponent->setFixedHeight( 24*m_fontScale );
     m_searchComponent->setPlaceholderText( " "+tr("Search Components"));
     searchLayout->addWidget( m_searchComponent );
-    connect( m_searchComponent, SIGNAL( editingFinished() ),
-             this,              SLOT(   searchChanged() ) );
+    connect( m_searchComponent, &QLineEdit::editingFinished,
+             this,              &MainWindow::searchChanged );
 
     m_clearButton = new QPushButton( this );
     m_clearButton->setFixedSize( 24*m_fontScale, 24*m_fontScale );
@@ -288,8 +288,8 @@ void MainWindow::createWidgets()
     m_clearButton->setToolTip( tr("Clear search"));
 
     searchLayout->addWidget( m_clearButton );
-    connect( m_clearButton, SIGNAL( clicked() ),
-             this,          SLOT(   clearSearch()) );
+    connect( m_clearButton, &QPushButton::clicked,
+             this,          &MainWindow::clearSearch );
 
     listLayout->addLayout( searchLayout );
 

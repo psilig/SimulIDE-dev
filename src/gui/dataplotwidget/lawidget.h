@@ -6,7 +6,7 @@
 #pragma once
 
 #include <QDialog>
-#include <QVector>
+#include <QList>
 
 #include "ui_lawidget.h"
 #include "plotdisplay.h"

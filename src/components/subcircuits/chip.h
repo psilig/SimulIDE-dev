@@ -78,7 +78,7 @@ class Chip : public Component, public eElement
 
         void initPackage(  QString pkgStr  );
 
-        void setPinStr( QVector<propStr_t> properties );
+        void setPinStr( QList<propStr_t> properties );
 
         virtual void embeedBackground( QString pixmapPath );
 

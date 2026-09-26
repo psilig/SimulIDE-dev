@@ -60,7 +60,7 @@ Watcher::Watcher( QWidget* parent, Watched* cpu, bool proxy )
     varView->setFont( font );
     varView->setModel( m_variableModel );
 
-    splitter->setSizes( {{50,320}} );
+    splitter->setSizes( {50, 320} );
     splitter_2->setSizes( {100,30} );
 
     connect( varView, &QListView::activated, this, &Watcher::VarDoubleClick );
@@ -216,7 +216,7 @@ void Watcher::mousePressEvent( QMouseEvent* event )
     if( m_proxy && event->button() == Qt::LeftButton )
     {
         m_mousePos = CircuitView::self()->mapToScene(
-                     CircuitView::self()->mapFromGlobal( event->globalPos() ) );
+                     CircuitView::self()->mapFromGlobal( event->globalPosition().toPoint() ) );
 
         m_proxy->setCursor( Qt::ClosedHandCursor );
     }
@@ -231,7 +231,7 @@ void Watcher::mouseMoveEvent( QMouseEvent* event )
         return;
     }
     QPointF pos = CircuitView::self()->mapToScene(
-                     CircuitView::self()->mapFromGlobal( event->globalPos() ) );
+                     CircuitView::self()->mapFromGlobal( event->globalPosition().toPoint() ) );
 
     QPointF deltaF = pos-m_mousePos;
     QPoint delta = deltaF.toPoint();

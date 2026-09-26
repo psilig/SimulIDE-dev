@@ -114,7 +114,7 @@ QMap<QString, QString> Chip::getPackages( QString compFile ) // Static
     {
         if( !line.startsWith("<item") ) continue;
 
-        QVector<propStr_t> properties = parseXmlProps( line );
+        QList<propStr_t> properties = parseXmlProps( line );
         propStr_t itemType = properties.takeFirst();
         if( itemType.name != "itemtype") continue;
         if( itemType.value != "Package") break;    // All packages processed
@@ -155,7 +155,7 @@ QString Chip::convertPackage( QString pkgText ) // Static, converts xml to new f
         if( line.startsWith("</") ) continue;
         if( line.isEmpty() ) continue;
 
-        QVector<propStr_t> properties = parseXmlProps( line );
+        QList<propStr_t> properties = parseXmlProps( line );
 
         if( line.startsWith("<package") )
         {
@@ -237,7 +237,7 @@ void Chip::initPackage( QString pkgStr )
     {
         if( line.isEmpty() ) continue;
 
-        QVector<propStr_t> properties = parseProps( line );
+        QList<propStr_t> properties = parseProps( line );
         if( properties.isEmpty() ) break;
 
         QString item = properties.takeFirst().name;
@@ -309,7 +309,7 @@ QString Chip::getDevice( QString id ) // Static
     return device;
 }
 
-void Chip::setPinStr( QVector<propStr_t> properties )
+void Chip::setPinStr( QList<propStr_t> properties )
 {
     int length = 8;
     int xpos   = -m_width/2-length;

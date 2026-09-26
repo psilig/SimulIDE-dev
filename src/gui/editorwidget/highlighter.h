@@ -40,10 +40,10 @@ class Highlighter : public QSyntaxHighlighter
 
         bool m_multiline;
         
-        QVector<HighlightRule> m_rules;
-        QVector<HighlightRule> m_objectRules;
-        QVector<HighlightRule> m_memberRules;
-        QVector<HighlightRule> m_extraRules;
+        QList<HighlightRule> m_rules;
+        QList<HighlightRule> m_objectRules;
+        QList<HighlightRule> m_memberRules;
+        QList<HighlightRule> m_extraRules;
 
         QRegularExpression m_multiStart;
         QRegularExpression m_multiEnd;

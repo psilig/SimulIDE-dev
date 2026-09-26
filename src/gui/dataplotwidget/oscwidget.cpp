@@ -358,7 +358,7 @@ void OscWidget::closeEvent( QCloseEvent* event )
 
 void OscWidget::mousePressEvent( QMouseEvent* event )
 {
-    m_mousePos = event->globalX();
+    m_mousePos = event->globalPosition().toPoint().x();
     if( event->button() == Qt::LeftButton )
     {
         m_action = actMove;
@@ -373,7 +373,7 @@ void OscWidget::mousePressEvent( QMouseEvent* event )
 
 void OscWidget::mouseMoveEvent( QMouseEvent* event )
 {
-    int pos = event->globalX();
+    int pos = event->globalPosition().toPoint().x();
     if( m_action == actMove )
     {
         double timeX = m_oscope->timeDiv()*10;

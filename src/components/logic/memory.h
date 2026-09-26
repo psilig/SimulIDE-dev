@@ -60,7 +60,7 @@ class Memory : public IoComponent, public eElement, public MemData
         int m_dataBytes;
         int m_address;
 
-        QVector<int> m_ram;
+        QList<int> m_ram;
 
         bool m_oe;
         bool m_we;

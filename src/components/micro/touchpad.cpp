@@ -251,7 +251,7 @@ void TouchPad::setTransparent( bool t )
 QPainterPath TouchPad::shape() const
 {
     QPainterPath path;
-    QVector<QPointF> points;
+    QList<QPointF> points;
 
     points << QPointF(-m_width/2,-m_height )
            << QPointF( m_width/2,-m_height )

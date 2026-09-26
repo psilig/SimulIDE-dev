@@ -48,7 +48,7 @@ class I2CRam : public IoComponent, public TwiModule, public MemData
         void contextMenu( QGraphicsSceneContextMenuEvent* event, QMenu* menu ) override;
 
     private:
-        QVector<int> m_ram;
+        QList<int> m_ram;
         int m_size;
         int m_addrPtr;
         int m_phase;

@@ -805,7 +805,7 @@ void EditorWidget::createActions()
     redoAct = new QAction(QIcon(":/redo.svg"), tr("Redo\tCtrl+Shift+Z"), this);
     redoAct->setStatusTip(tr("Redo the last action"));
     redoAct->setEnabled(false);
-    connect(redoAct, SIGNAL(triggered()), this, SLOT(redo()));
+    connect(redoAct, &QAction::triggered, this, &EditorWidget::redo, Qt::UniqueConnection);
 
     runAct =  new QAction(QIcon(":/runtobk.png"),tr("Run To Breakpoint"), this);
     runAct->setStatusTip(tr("Run to next breakpoint"));

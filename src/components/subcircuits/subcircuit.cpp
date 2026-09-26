@@ -186,7 +186,7 @@ void SubCircuit::loadSubCircuit( QString doc )
     {
         if( !line.startsWith("<item") ) continue;
 
-        QVector<propStr_t> properties = parseXmlProps( line );
+        QList<propStr_t> properties = parseXmlProps( line );
 
         propStr_t itemType = properties.takeFirst();
         if( itemType.name != "itemtype") continue;

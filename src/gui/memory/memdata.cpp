@@ -42,7 +42,7 @@ void MemData::showTable( int dataSize, int wordBytes )
     m_memTable->show();
 }
 
-bool MemData::loadData( QVector<int>* toData, bool resize, int bits )
+bool MemData::loadData( QList<int>* toData, bool resize, int bits )
 {
     Simulator::self()->pauseSim();
 
@@ -59,7 +59,7 @@ bool MemData::loadData( QVector<int>* toData, bool resize, int bits )
     return ok;
 }
 
-bool MemData::loadFile( QVector<int>* toData, QString file, bool resize, int bits, eMcu* eMcu )
+bool MemData::loadFile( QList<int>* toData, QString file, bool resize, int bits, eMcu* eMcu )
 {
     m_eMcu = eMcu;
     if( eMcu ) return loadHex( toData, file, resize, bits ); // MCUs file must be hex format
@@ -78,7 +78,7 @@ bool MemData::loadFile( QVector<int>* toData, QString file, bool resize, int bit
     return ok;
 }
 
-bool MemData::loadDat( QVector<int>* toData, QString file, bool resize )
+bool MemData::loadDat( QList<int>* toData, QString file, bool resize )
 {
     QStringList lines = fileToStringList( file, "MemData::loadTxt" );
 
@@ -116,7 +116,7 @@ bool MemData::loadDat( QVector<int>* toData, QString file, bool resize )
     return true;
 }
 
-bool MemData::loadHex( QVector<int>* toData, QString file, bool resize, int bits )
+bool MemData::loadHex( QList<int>* toData, QString file, bool resize, int bits )
 {
     qDebug() <<"Loading hex file:\n"<<file<<"\n";
     QStringList lineList = fileToStringList( file, "MemData::loadHex" );
@@ -222,7 +222,7 @@ bool MemData::loadHex( QVector<int>* toData, QString file, bool resize, int bits
     return false;
 }
 
-bool MemData::loadBin(QVector<int>* toData, QString file, bool resize, int bits )
+bool MemData::loadBin(QList<int>* toData, QString file, bool resize, int bits )
 {
     int bytes = (bits+7)/8;
     int dataEnd = toData->size()-1;
@@ -252,7 +252,7 @@ bool MemData::loadBin(QVector<int>* toData, QString file, bool resize, int bits 
     return true;
 }
 
-void MemData::saveData( QVector<int>* data, int bits )
+void MemData::saveData( QList<int>* data, int bits )
 {
      Simulator::self()->pauseSim();
 
@@ -282,7 +282,7 @@ void MemData::saveData( QVector<int>* data, int bits )
         }
         if( !outFile.open( QFile::WriteOnly | QFile::Text ) )
         {
-             QMessageBox::warning(nullptr, "MemData::saveData",
+             QMessageBox::warning(MainWindow::self(), "MemData::saveData",
              simulideTr( "MemData", "Cannot write file %1:\n%2.").arg(fileName).arg(outFile.errorString()));
         }else{
             QTextStream toFile( &outFile );
@@ -293,7 +293,7 @@ void MemData::saveData( QVector<int>* data, int bits )
     {
         if( !outFile.open( QFile::WriteOnly ) )
         {
-              QMessageBox::warning(nullptr, "MemData::saveData",
+              QMessageBox::warning(MainWindow::self(), "MemData::saveData",
               simulideTr( "MemData", "Cannot write file %1:\n%2.").arg(fileName).arg(outFile.errorString()));
         }else{
             for( int val : *data ){
@@ -308,22 +308,22 @@ void MemData::saveData( QVector<int>* data, int bits )
     Simulator::self()->resumeSim();
 }
 
-void MemData::saveDat( QVector<int>* data, int bits )
+void MemData::saveDat( QList<int>* data, int bits )
 {
 
 }
 
-void MemData::saveHex( QVector<int>* data, int bits ) /// TODO
+void MemData::saveHex( QList<int>* data, int bits ) /// TODO
 {
 
 }
 
-void MemData::saveBin( QVector<int>* data, int bits )
+void MemData::saveBin( QList<int>* data, int bits )
 {
 
 }
 
-QString MemData::getMem( QVector<int>* data )
+QString MemData::getMem( QList<int>* data )
 {
     QString m;
     int size = data->size();
@@ -340,7 +340,7 @@ QString MemData::getMem( QVector<int>* data )
     return m;
 }
 
-void MemData::setMem( QVector<int>* data, QString m )
+void MemData::setMem( QList<int>* data, QString m )
 {
     if( m.isEmpty() ) return;
 

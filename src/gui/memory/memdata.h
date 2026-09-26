@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <QVector>
+#include <QList>
 
 class MemTable;
 class eMcu;
@@ -16,16 +16,16 @@ class MemData
         MemData();
         ~MemData();
 
-        static bool loadData( QVector<int>* toData, bool resize=false, int bits=8 );
-        static void saveData( QVector<int>* data, int bits=8 );
+        static bool loadData( QList<int>* toData, bool resize=false, int bits=8 );
+        static void saveData( QList<int>* data, int bits=8 );
 
-        static bool loadFile( QVector<int>* toData, QString file, bool resize, int bits, eMcu* eMcu=nullptr );
-        static bool loadDat( QVector<int>* toData, QString file, bool resize );
-        static bool loadHex( QVector<int>* toData, QString file, bool resize, int bits );
-        static bool loadBin( QVector<int>* toData, QString file, bool resize, int bits );
+        static bool loadFile( QList<int>* toData, QString file, bool resize, int bits, eMcu* eMcu=nullptr );
+        static bool loadDat( QList<int>* toData, QString file, bool resize );
+        static bool loadHex( QList<int>* toData, QString file, bool resize, int bits );
+        static bool loadBin( QList<int>* toData, QString file, bool resize, int bits );
 
-        static QString getMem( QVector<int>* data );
-        static void setMem( QVector<int>* data, QString m );
+        static QString getMem( QList<int>* data );
+        static void setMem( QList<int>* data, QString m );
 
         virtual void showTable( int dataSize=256, int wordBytes=1 );
 
@@ -33,7 +33,7 @@ class MemData
         MemTable* m_memTable;
         static eMcu* m_eMcu;
 
-        static void saveDat( QVector<int>* data, int bits );
-        static void saveHex( QVector<int>* data, int bits ); /// TODO
-        static void saveBin( QVector<int>* data, int bits );
+        static void saveDat( QList<int>* data, int bits );
+        static void saveHex( QList<int>* data, int bits ); /// TODO
+        static void saveBin( QList<int>* data, int bits );
 };

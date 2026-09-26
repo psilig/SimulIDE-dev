@@ -115,7 +115,7 @@ void CircuitView::dragEnterEvent( QDragEnterEvent* event )
 
     event->accept(); // Not moving items in the list (this will prevent removing items from the list)
 
-    m_enterItem = m_circuit->createComponent( type, name, mapToScene( event->pos() ).toPoint() );
+    m_enterItem = m_circuit->createComponent( type, name, mapToScene( event->position().toPoint() ).toPoint() );
     if( m_enterItem )
     {
         m_circuit->clearSelection();
@@ -129,7 +129,7 @@ void CircuitView::dragMoveEvent( QDragMoveEvent* event )
     event->accept();
     if( !m_enterItem ) return;
 
-    QPointF itemPos = mapToScene( event->pos() );
+    QPointF itemPos = mapToScene( event->position().toPoint() );
     if( !m_enterItem->freeMove( false ) ) itemPos = toGrid( itemPos );
     m_enterItem->moveTo( itemPos );
 }
@@ -179,8 +179,10 @@ void CircuitView::mousePressEvent( QMouseEvent* event )
         QGraphicsView::mousePressEvent( event );
         if( event->isAccepted() ) return;
 
-        event = new QMouseEvent( QEvent::MouseButtonPress, event->pos(),
-                                 Qt::LeftButton, Qt::LeftButton, Qt::ShiftModifier );
+        QMouseEvent ev( QEvent::MouseButtonPress, event->position(), event->globalPosition(),
+                        Qt::LeftButton, Qt::LeftButton, Qt::ShiftModifier );
+        QGraphicsView::mousePressEvent( &ev );
+        return;
     }
     QGraphicsView::mousePressEvent( event );
 }
@@ -212,8 +214,8 @@ void CircuitView::mouseReleaseEvent( QMouseEvent* event )
         && !(event->modifiers() & Qt::ControlModifier) ) )
     {
         event->accept();
-        QMouseEvent eve( QEvent::MouseButtonRelease, event->pos(),
-            Qt::LeftButton, Qt::LeftButton, Qt::NoModifier   );
+        QMouseEvent eve( QEvent::MouseButtonRelease, event->position(), event->globalPosition(),
+            Qt::LeftButton, Qt::LeftButton, Qt::NoModifier );
 
         QGraphicsView::mouseReleaseEvent( &eve );
     }

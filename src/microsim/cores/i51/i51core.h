@@ -77,7 +77,7 @@ class I51Core : public Mcu8bits, public eElement
         uint8_t  m_opcode;
         uint8_t* m_acc;
         
-        QVector<uint8_t> m_readOp;
+        QList<uint8_t> m_readOp;
         uint16_t m_opAddr;
         uint8_t m_addrMode;
         uint8_t m_op0;

@@ -72,8 +72,8 @@ class eMcu : public DataSpace, public eIou
         uint32_t wordSize() { return m_wordSize; }
         uint8_t  pgmPage() { return m_pgmPage; }
 
-        QVector<int>* eeprom() { return &m_eeprom; }
-        void setEeprom( QVector<int>* eep );
+        QList<int>* eeprom() { return &m_eeprom; }
+        void setEeprom( QList<int>* eep );
         uint32_t romSize()  { return m_romSize; }
         uint8_t  getRomValue( int address ) { return m_eeprom[address]; }
         void     setRomValue( int address, uint8_t value ) { m_eeprom[address] = value; }
@@ -135,7 +135,7 @@ class eMcu : public DataSpace, public eIou
         //QHash<QString, int> m_regsTable;   // int max 32 bits
 
         uint32_t m_romSize;
-        QVector<int> m_eeprom;
+        QList<int> m_eeprom;
         bool m_saveEepr;
 
         std::vector<McuModule*> m_modules;
