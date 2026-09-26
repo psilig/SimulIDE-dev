@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QListWidget>
 #include <QPushButton>
+#include <QToolButton>
 #include <QLineEdit>
 #include <QMenu>
 #include <QSettings>
@@ -62,17 +63,17 @@ FileWidget::FileWidget( QWidget* parent )
     addEntry("Settings",   settingsDir );
     addEntry("Last Project", NULL, true );
 
-    connect( m_bookmarks, SIGNAL( itemClicked( QListWidgetItem* )), 
-             this,        SLOT(   itemClicked( QListWidgetItem* )), Qt::UniqueConnection);
+    connect( m_bookmarks, &QListWidget::itemClicked,
+             this,        &FileWidget::itemClicked, Qt::UniqueConnection);
              
     //connect( m_searchFiles, SIGNAL( editingFinished() ),
     //         this,          SLOT( searchChanged() ), Qt::UniqueConnection);
 
-    connect( m_cdUpButton,  SIGNAL( released() ),
-             m_fileBrowser, SLOT( cdUp() ), Qt::UniqueConnection);
+    connect( m_cdUpButton,  &QToolButton::released,
+             m_fileBrowser, &FileBrowser::cdUp, Qt::UniqueConnection);
              
-    connect( m_path, SIGNAL( editingFinished() ),
-             this,   SLOT(  pathChanged() ), Qt::UniqueConnection);
+    connect( m_path, &QLineEdit::editingFinished,
+             this,   &FileWidget::pathChanged, Qt::UniqueConnection);
              
     int size = settings->beginReadArray("bookmarks");
     

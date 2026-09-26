@@ -195,7 +195,7 @@ void CircuitWidget::createActions()
     aboutQtAct = new QAction( QIcon(":/about.svg"),tr("About Qt"), this);
     aboutQtAct->setStatusTip(tr("About Qt"));
     connect( aboutQtAct, &QAction::triggered,
-                   qApp, &QApplication::aboutQt, Qt::UniqueConnection );
+                   qApp, &QApplication::aboutQt );
 }
 
 void CircuitWidget::createToolBars()

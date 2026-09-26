@@ -484,7 +484,6 @@ bool Circuit::saveString( QString fileName, QString doc )
         return false;
     }
     QTextStream out( &file );
-    out.setCodec("UTF-8");
     out << doc;
     file.close();
 
@@ -962,7 +961,6 @@ void Circuit::deleteNewConnector()
     bom.sort();
 
     QTextStream out(&file);
-    out.setCodec("UTF-8");
     out <<  "\nCircuit: ";
     out <<  QFileInfo( m_filePath ).fileName();
     out <<  "\n\n";

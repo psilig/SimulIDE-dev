@@ -625,7 +625,6 @@ void SubPackage::savePackage( QString fileName )
           return;
     }
     QTextStream out(&file);
-    out.setCodec("UTF-8");
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 

@@ -5,7 +5,9 @@
 
 #pragma once
 
-#include <QAudioOutput>
+// Qt6: QAudioOutput → QAudioSink (full multimedia port deferred)
+#include <QAudioDevice>
+#include <QAudioFormat>
 
 #include "e-resistor.h"
 #include "component.h"
@@ -44,10 +46,10 @@ class AudioOut : public Component, public eResistor
         void updtProperties();
 
     private:
-        QAudioDeviceInfo m_deviceinfo;
-        QAudioFormat     m_format;
+        QAudioDevice  m_deviceinfo;   // Qt6: was QAudioDeviceInfo
+        QAudioFormat  m_format;
 
-        QAudioOutput* m_audioOutput;
+        QAudioSink*   m_audioOutput;   // Qt6: was QAudioOutput
         QIODevice*    m_audioBuffer;
         QByteArray    m_dataBuffer;
 

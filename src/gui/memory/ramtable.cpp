@@ -114,11 +114,11 @@ RamTable::RamTable( QWidget* parent, eMcu* processor ,bool cpuMonitor )
     connect( registers, SIGNAL(activated(QModelIndex)),
              this,      SLOT(RegDoubleClick(QModelIndex)));
 
-    connect( this, SIGNAL(customContextMenuRequested(const QPoint&)),
-             this, SLOT  (slotContextMenu(const QPoint&)), Qt::UniqueConnection);
+    connect( this, &RamTable::customContextMenuRequested,
+             this, &RamTable::slotContextMenu, Qt::UniqueConnection);
 
-    connect( table, SIGNAL(itemChanged(QTableWidgetItem*)  ),
-             this, SLOT(addToWatch(QTableWidgetItem*)), Qt::UniqueConnection );
+    connect( table, &QTableWidget::itemChanged,
+             this, &RamTable::addToWatch, Qt::UniqueConnection );
 }
 
 void RamTable::RegDoubleClick( const QModelIndex& index )
@@ -143,19 +143,19 @@ void RamTable::slotContextMenu( const QPoint& point )
 {
     QMenu menu;
 
-    QAction *clearSelected = menu.addAction( ThemeManager::self()->icon(":/remove.svg"),tr("Clear Selected") );
-    connect( clearSelected, SIGNAL(triggered()), this, SLOT(clearSelected()), Qt::UniqueConnection );
+    QAction *actClearSelected = menu.addAction( ThemeManager::self()->icon(":/remove.svg"),tr("Clear Selected") );
+    connect( actClearSelected, &QAction::triggered, this, &RamTable::clearSelected, Qt::UniqueConnection );
 
     QAction *clearTable = menu.addAction( ThemeManager::self()->icon(":/remove.svg"),tr("Clear Table") );
-    connect( clearTable, SIGNAL(triggered()), this, SLOT(clearTable()), Qt::UniqueConnection );
+    connect( clearTable, &QAction::triggered, this, &RamTable::clearTable, Qt::UniqueConnection );
 
     menu.addSeparator();
 
     QAction *loadVarSet = menu.addAction( ThemeManager::self()->icon(":/open.png"),tr("Load VarSet") );
-    connect( loadVarSet, SIGNAL(triggered()), this, SLOT(loadVarSet()), Qt::UniqueConnection );
+    connect( loadVarSet, &QAction::triggered, this, qOverload<>(&RamTable::loadVarSet), Qt::UniqueConnection );
 
     QAction *saveVarSet = menu.addAction( ThemeManager::self()->icon(":/save.png"),tr("Save VarSet") );
-    connect( saveVarSet, SIGNAL(triggered()), this, SLOT(saveVarSet()), Qt::UniqueConnection );
+    connect( saveVarSet, &QAction::triggered, this, &RamTable::saveVarSet, Qt::UniqueConnection );
 
     menu.exec( mapToGlobal(point) );
 }
@@ -238,7 +238,6 @@ void RamTable::saveVarSet()
         file.flush();
 
         QTextStream out(&file);
-        out.setCodec("UTF-8");
         QApplication::setOverrideCursor(Qt::WaitCursor);
 
         for( int row=0; row<m_numRegs; row++ )

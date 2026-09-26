@@ -831,7 +831,6 @@ void CodeEditor::saveConfig()
         return;
     }
     QTextStream out( &file );
-    out.setCodec("UTF-8");
     out << config;
     file.close();
 }
